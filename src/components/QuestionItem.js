@@ -1,25 +1,30 @@
 import React from "react";
 
-function QuestionItem({ question }) {
-  const { id, prompt, answers, correctIndex } = question;
-
-  const options = answers.map((answer, index) => (
-    <option key={index} value={index}>
-      {answer}
-    </option>
-  ));
+function QuestionList({ questions, onDeleteQuestion, onUpdateQuestion }) {
+  const handleUpdateClick = (question) => {
+    const newCorrectIndex = (question.correctIndex + 1) % question.answers.length;
+    const updatedQuestion = { ...question, correctIndex: newCorrectIndex };
+    onUpdateQuestion(updatedQuestion);
+  };
 
   return (
-    <li>
-      <h4>Question {id}</h4>
-      <h5>Prompt: {prompt}</h5>
-      <label>
-        Correct Answer:
-        <select defaultValue={correctIndex}>{options}</select>
-      </label>
-      <button>Delete Question</button>
-    </li>
+    <ul>
+      {questions.map((question) => (
+        <li key={question.id}>
+          <h2>{question.prompt}</h2>
+          <ul>
+            {question.answers.map((answer, index) => (
+              <li key={index}>
+                {answer} {index === question.correctIndex && "(Correct)"}
+              </li>
+            ))}
+          </ul>
+          <button onClick={() => handleUpdateClick(question)}>Update Answer</button>
+          <button onClick={() => onDeleteQuestion(question.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-export default QuestionItem;
+export default QuestionList;
