@@ -3,11 +3,11 @@
 
 require("jest-fetch-mock").enableMocks();
 module.exports = {
-    transform: {
-      "^.+\\.jsx?$": "babel-jest",
-    },
     transformIgnorePatterns: [
-      "/node_modules/(?!@adobe/css-tools)"
-    ],
+        "/node_modules/(?!@adobe/css-tools)"  
+      ],
+      transform: {
+        "^.+\\.(js|jsx)$": "babel-jest"
+      }
   };
   
