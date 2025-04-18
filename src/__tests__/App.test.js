@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "../components/App";
+import { cleanup } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
 import '@testing-library/jest-dom';
 
@@ -7,8 +8,15 @@ import '@testing-library/jest-dom';
 fetchMock.enableMocks();
 
 beforeEach(() => {
+  cleanup();
   fetch.resetMocks(); 
+  jest.spyOn(console, 'error').mockImplementation(() => {});
 });
+
+afterAll(() => {
+  console.error.mockRestore();
+});
+
 
 test("creates a new question when the form is submitted", async () => {
   // Mock the GET request for fetching initial questions (empty array initially)
@@ -60,6 +68,18 @@ test("creates a new question when the form is submitted", async () => {
 });
 
 test("updates the answer when the dropdown is changed", async () => {
+  fetch.mockResponseOnce(JSON.stringify([])); 
+
+  // Mock the POST request when adding a question
+  fetch.mockResponseOnce(
+    JSON.stringify({
+      id: 1,
+      prompt: "lorem testum 1",
+      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+      correctIndex: 2,
+    })
+  ); 
+
   render(<App />);
 
   // Add a new question first (similar to the first test)
