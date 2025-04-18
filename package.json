@@ -10,10 +10,14 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
     "@learn-co-curriculum/jest-learn-reporter": "^0.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "babel-jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "mocha": "^8.2.1",
     "msw": "^0.24.2"
@@ -43,8 +47,5 @@
       "last 1 safari version"
     ]
   },
-  
-    "questions": []
-  
-  
+  "questions": []
 }

@@ -57,13 +57,13 @@ test("creates a new question when the form is submitted", async () => {
     target: { value: "2" },
   });
 
-  // Submit the form to add the question
+  // Submitting the form to add the question
   fireEvent.click(screen.getByText("Add Question"));
 
   // Wait for the new question to appear in the list
   await waitFor(() => screen.getByText("lorem testum 1"));
   
-  // Ensure the question is rendered
+  // Ensuring the question is rendered
   expect(screen.getByText("lorem testum 1")).toBeInTheDocument();
 });
 
@@ -82,7 +82,7 @@ test("updates the answer when the dropdown is changed", async () => {
 
   render(<App />);
 
-  // Add a new question first (similar to the first test)
+ 
   fireEvent.click(screen.getByText("New Question"));
   fireEvent.change(screen.getByLabelText(/Question Prompt/), {
     target: { value: "lorem testum 1" },
@@ -103,14 +103,14 @@ test("updates the answer when the dropdown is changed", async () => {
     target: { value: "2" },
   });
 
-  // Submit the question
+ 
   fireEvent.click(screen.getByText("Add Question"));
 
-  // Now, simulate the action to change the correct answer in the dropdown
+  
   fireEvent.change(screen.getByLabelText(/Correct Answer/), {
-    target: { value: "3" }, // Simulate selecting the 4th answer (index 3)
+    target: { value: "3" }, 
   });
 
-  // Check if the correct answer dropdown value has changed
+  
   expect(screen.getByLabelText(/Correct Answer/).value).toBe("3");
 });
